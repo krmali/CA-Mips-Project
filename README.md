@@ -1,4 +1,4 @@
 CA-Mips-Project
 ===============
 
-MIPS 
+MIPS Project for the university     
