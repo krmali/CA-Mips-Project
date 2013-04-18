@@ -23,11 +23,10 @@ public class ALUControl {
 		possibleInputs.put("0110","subtract");
 		possibleInputs.put("0111", "slt");
 		possibleInputs.put("1100","nor");	
-		AluControlOutput = possibleInputs.get(ALUOp);
 	}
 	
-	public String ALUControlOutput(){
-		return AluControlOutput;
+	public void ALUControlOutput(){
+		AluControlOutput = possibleInputs.get(ALUOp);
 	}
 
 }
