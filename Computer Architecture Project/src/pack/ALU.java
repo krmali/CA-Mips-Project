@@ -102,7 +102,7 @@ public class ALU {
 		aluOutput = result;
 	}
 	
-	private static int integerValueOf(String binaryString){
+	public static int integerValueOf(String binaryString){
 		if(binaryString.charAt(0)=='1'){
 			String result = binaryString;
 			result = result.replace('0', '2');
