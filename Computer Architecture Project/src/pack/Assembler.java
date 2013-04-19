@@ -382,9 +382,12 @@ public class Assembler {
 	}
 	
 	public void  printAssembledInstruction(String [] instructions){
+		System.out.println("================================");
+		System.out.println("Assembled file:");
 		for(int i = 0; i < instructions.length;i++){
 			System.out.println(instructions[i]);
 		}
+		System.out.println("================================");
 	}
 
 	public String translateRegister(String instructionPart) {
