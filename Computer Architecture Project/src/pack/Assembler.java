@@ -4,8 +4,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.LineNumberReader;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
 
@@ -78,6 +80,8 @@ public class Assembler {
 		
 		assemb.printAssembledInstruction(temp);
 		
+		System.out.println(countNumberOfLines(new File("/Users/kareemali/Desktop/test.txt")));
+		
 
 
 		//		System.out.println(assemb.translateRFormatNumber("32"));
@@ -97,7 +101,7 @@ public class Assembler {
 	}
 
 	public String[] assemble(File file) {
-		String[] result = new String[9];
+		String[] result = new String[this.countNumberOfLines(file)];
 		int instructionNumber = 0;
 		try {
 			FileInputStream fis = new FileInputStream(file);
@@ -616,5 +620,27 @@ public class Assembler {
 			resultString = "0"+ resultString;
 		}
 		return resultString;
+	}
+	
+	public static
+	int countNumberOfLines(File file){
+		FileReader fr = null;
+		try {
+			fr = new FileReader(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		LineNumberReader lnr = new LineNumberReader(fr);
+		
+		int linesCount = 0 ;
+		try {
+			while(lnr.readLine()!= null)
+			{
+				linesCount ++;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return linesCount;
 	}
 }
