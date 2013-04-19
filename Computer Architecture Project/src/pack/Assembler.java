@@ -130,7 +130,9 @@ public class Assembler {
 				}
 			}
 		} catch (Exception e) {
+			
 			System.out.println("Error occur when trying to read from file.");
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -165,7 +167,7 @@ public class Assembler {
 		if (instruction[0].equals("lw")) {
 			String [] op = translateOp("lw");
 			String temp = instruction[2];
-			String[] tempArray = temp.split("(");
+			String[] tempArray = temp.split("\\(");
 			temp = tempArray[tempArray.length-1];
 			String tempNum = tempArray[0];
 			temp = temp.substring(0, temp.length()-1); 
@@ -177,7 +179,7 @@ public class Assembler {
 		if (instruction[0].equals("lh")) {
 			String [] op = translateOp("lh");
 			String temp = instruction[2];
-			String[] tempArray = temp.split("(");
+			String[] tempArray = temp.split("\\(");
 			temp = tempArray[tempArray.length-1];
 			String tempNum = tempArray[0];
 			temp = temp.substring(0, temp.length()-1); 
@@ -190,7 +192,7 @@ public class Assembler {
 		if (instruction[0].equals("lhu")) {
 			String [] op = translateOp("lhu");
 			String temp = instruction[2];
-			String[] tempArray = temp.split("(");
+			String[] tempArray = temp.split("\\(");
 			temp = tempArray[tempArray.length-1];
 			String tempNum = tempArray[0];
 			temp = temp.substring(0, temp.length()-1); 
@@ -203,7 +205,7 @@ public class Assembler {
 		if (instruction[0].equals("lb")) {
 			String [] op = translateOp("lb");
 			String temp = instruction[2];
-			String[] tempArray = temp.split("(");
+			String[] tempArray = temp.split("\\(");
 			temp = tempArray[tempArray.length-1];
 			String tempNum = tempArray[0];
 			temp = temp.substring(0, temp.length()-1); 
@@ -225,9 +227,9 @@ public class Assembler {
 					translateIFormatNumber(tempNum);
 		}
 		if (instruction[0].equals("sw")) {
-			String [] op = translateOp("lb");
+			String [] op = translateOp("sw");
 			String temp = instruction[2];
-			String[] tempArray = temp.split("(");
+			String[] tempArray = temp.split("\\(");
 			temp = tempArray[tempArray.length-1];
 			String tempNum = tempArray[0];
 			temp = temp.substring(0, temp.length()-1); 
@@ -239,7 +241,7 @@ public class Assembler {
 		if (instruction[0].equals("sh")) {
 			String [] op = translateOp("sh");
 			String temp = instruction[2];
-			String[] tempArray = temp.split("(");
+			String[] tempArray = temp.split("\\(");
 			temp = tempArray[tempArray.length-1];
 			String tempNum = tempArray[0];
 			temp = temp.substring(0, temp.length()-1); 
@@ -251,7 +253,7 @@ public class Assembler {
 		if (instruction[0].equals("sb")) {
 			String [] op = translateOp("sb");
 			String temp = instruction[2];
-			String[] tempArray = temp.split("(");
+			String[] tempArray = temp.split("\\(");
 			temp = tempArray[tempArray.length-1];
 			String tempNum = tempArray[0];
 			temp = temp.substring(0, temp.length()-1); 
@@ -382,100 +384,100 @@ public class Assembler {
 	}
 
 	public String translateRegister(String instructionPart) {
-		if (instructionPart == "$a0") {
+		if (instructionPart.equals("$a0")) {
 			return "00100";
 		}
-		if (instructionPart == "$a1") {
+		if (instructionPart.equals("$a1")) {
 			return "00101";
 		}
-		if (instructionPart == "$a2") {
+		if (instructionPart.equals("$a2")) {
 			return "00110";
 		}
-		if (instructionPart == "$a3") {
+		if (instructionPart.equals("$a3")) {
 			return "00111";
 		}
-		if (instructionPart == "$v0") {
+		if (instructionPart.equals("$v0")) {
 			return "00010";
 		}
-		if (instructionPart == "$v1") {
+		if (instructionPart.equals("$v1")) {
 			return "00011";
 		}
-		if (instructionPart == "$t0") {
+		if (instructionPart.equals("$t0")) {
 			return "01000";
 		}
-		if (instructionPart == "$t1") {
+		if (instructionPart.equals("$t1")) {
 			return "01001";
 		}
-		if (instructionPart == "$t2") {
+		if (instructionPart.equals("$t2")) {
 			return "01010";
 		}
-		if (instructionPart == "$t3") {
+		if (instructionPart.equals("$t3")) {
 			return "01011";
 		}
-		if (instructionPart == "$t4") {
+		if (instructionPart.equals("$t4")) {
 			return "01100";
 		}
-		if (instructionPart == "$t5") {
+		if (instructionPart.equals("$t5")) {
 			return "01101";
 		}
-		if (instructionPart == "$t6") {
+		if (instructionPart.equals("$t6")) {
 			return "01110";
 		}
-		if (instructionPart == "$t7") {
+		if (instructionPart.equals("$t7")) {
 			return "01111";
 		}
-		if (instructionPart == "$t8") {
+		if (instructionPart.equals("$t8")) {
 			return "11000";
 		}
-		if (instructionPart == "$t9") {
+		if (instructionPart.equals("$t9")) {
 			return "11001";
 		}
-		if (instructionPart == "$so") {
+		if (instructionPart.equals("$s0")) {
 			return "10000";
 		}
-		if (instructionPart == "$s1") {
+		if (instructionPart.equals("$s1")) {
 			return "10001";
 		}
-		if (instructionPart == "$s2") {
+		if (instructionPart.equals("$s2")) {
 			return "10010";
 		}
-		if (instructionPart == "$s3") {
+		if (instructionPart.equals("$s3")) {
 			return "10011";
 		}
-		if (instructionPart == "$s4") {
+		if (instructionPart.equals("$s4")) {
 			return "10100";
 		}
-		if (instructionPart == "$s5") {
+		if (instructionPart.equals("$s5")) {
 			return "10101";
 		}
-		if (instructionPart == "$s6") {
+		if (instructionPart.equals("$s6")) {
 			return "10110";
 		}
-		if (instructionPart == "$s7") {
+		if (instructionPart.equals("$s7")) {
 			return "10111";
 		}
-		if (instructionPart == "$gp") {
+		if (instructionPart.equals("$gp")) {
 			return "11100";
 		}
-		if (instructionPart == "$sp") {
+		if (instructionPart.equals("$sp")) {
 			return "11101";
 		}
-		if (instructionPart == "$fp") {
+		if (instructionPart.equals("$fp")) {
 			return "11110";
 		}
-		if (instructionPart == "$ra") {
+		if (instructionPart.equals("$ra")) {
 			return "11111";
 		}
-		if (instructionPart == "$0") {
+		if (instructionPart.equals("$0")) {
 			return "00000";
 		}
-		if (instructionPart == "$at") {
+		if (instructionPart.equals("$at")) {
 			return "00001";
 		}
-		if (instructionPart == "$k0") {
+		if (instructionPart.equals("$k0")) {
 			return "11010";
 		}
-		if (instructionPart == "$k1") {
+		if (instructionPart.equals("$k1")) {
 			return "11011";
 		}
 		return "";
@@ -483,92 +485,92 @@ public class Assembler {
 
 	public String[] translateOp(String instructionPart) {
 		String[] result = { "XXXXXX", "XXXXXX" };
-		if (instructionPart == "add") {
+		if (instructionPart.equals("add")) {
 			result[0] = "000000";
 			result[1] = "100000";
 
 		}
-		if (instructionPart == "addi") {
+		if (instructionPart.equals("addi")) {
 			result[0] = "001000";
 		}
-		if (instructionPart == "sub") {
+		if (instructionPart.equals("sub")) {
 			result[0] = "000000";
 			result[1] = "100010";
 		}
-		if (instructionPart == "lw") {
+		if (instructionPart.equals("lw")) {
 			result[0] = "100011";
 		}
-		if (instructionPart == "lh") {
+		if (instructionPart.equals("lh")) {
 			result[0] = "100001";
 		}
-		if (instructionPart == "lhu") {
+		if (instructionPart.equals("lhu")) {
 			result[0] = "100101";
 		}
-		if (instructionPart == "lb") {
+		if (instructionPart.equals("lb")) {
 			result[0] = "100000";
 		}
-		if (instructionPart == "lbu") {
+		if (instructionPart.equals("lbu")) {
 			result[0] = "100100";
 		}
-		if (instructionPart == "sw") {
+		if (instructionPart.equals("sw")) {
 			result[0] = "101011";
 		}
-		if (instructionPart == "sh") {
+		if (instructionPart.equals("sh")) {
 			result[0] = "101001";
 		}
-		if (instructionPart == "sb") {
+		if (instructionPart.equals("sb")) {
 			result[0] = "101000";
 		}
-		if (instructionPart == "lui") {
+		if (instructionPart.equals("lui")) {
 			result[0] = "001111";//after XXXXX
 		}
-		if (instructionPart == "sll") {
+		if (instructionPart.equals("sll")) {
 			result[0] = "000000";
 			result[1] = "000000";
 		}
-		if (instructionPart == "srl") {
+		if (instructionPart.equals("srl")) {
 			result[0] = "000000";//after XXXXX
 			result[1] = "000010";
 		}
-		if (instructionPart == "and") {
+		if (instructionPart.equals("and")) {
 			result[0] = "000000";
 			//00000
 			result[1] = "100100";
 		}
-		if (instructionPart == "andi") {
+		if (instructionPart.equals("andi")) {
 			result[0] = "001100";
 		}
-		if (instructionPart == "or") {
+		if (instructionPart.equals("or")) {
 			result[0] = "000000";
 			//00000
 			result[1] = "100101";
 		}
-		if (instructionPart == "ori") {
+		if (instructionPart.equals("ori")) {
 			result[0] = "001101";
 		}
-		if (instructionPart == "nor") {
+		if (instructionPart.equals("nor")) {
 			result[0] = "000000";
 			//00000
 			result[1] = "100111";
 		}
-		if (instructionPart == "beq") {
+		if (instructionPart.equals("beq")) {
 			result[0] = "000100";
 		}
-		if (instructionPart == "bne") {
+		if (instructionPart.equals("bne")) {
 			result[0] = "000101";
 		}
-		if (instructionPart == "j") {
+		if (instructionPart.equals("j")) {
 			result[0] = "000010";
 		}
-		if (instructionPart == "jal") {
+		if (instructionPart.equals("jal")) {
 			result[0] = "000011";
 		}
-		if (instructionPart == "jr") {
+		if (instructionPart.equals("jr")) {
 			result[0] = "000000";
 			//000000000000000
 			result[1] = "001000";
 		}
-		if (instructionPart == "slt") {
+		if (instructionPart.equals("slt")) {
 			result[0] = "000000";
 			//00000
 			result[1] = "101010";
