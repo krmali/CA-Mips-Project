@@ -75,6 +75,7 @@ public class Assembler {
 		Assembler assemb = new Assembler();
 
 		String[] temp =  assemb.assemble(new File("/Users/kareemali/Desktop/test.txt"));
+		
 		assemb.printAssembledInstruction(temp);
 		
 
@@ -96,7 +97,7 @@ public class Assembler {
 	}
 
 	public String[] assemble(File file) {
-		String[] result = new String[20];
+		String[] result = new String[9];
 		int instructionNumber = 0;
 		try {
 			FileInputStream fis = new FileInputStream(file);
@@ -104,6 +105,7 @@ public class Assembler {
 			String[] instruction = { "", "", "", "" };
 			int separator = 0;
 			while ((content = fis.read()) != -1) {
+				//System.out.println(content);
 				if (content != 10) {
 					if (separator == 0 && content == 36) {
 						separator++;
@@ -116,24 +118,26 @@ public class Assembler {
 						instruction[separator] += Character.toChars(content)[0];
 					}
 				} else {
+					System.out.println(instruction[0]+":"+instruction[1]+":"+instruction[2]+":" +
+							instruction[3]);
 					result[instructionNumber] = instructionAssemble(instruction);
 					instruction[0] = "";
 					instruction[1] = "";
 					instruction[2] = "";
 					instruction[3] = "";
+					separator = 0;
 					instructionNumber++;
 				}
 			}
 		} catch (Exception e) {
 			System.out.println("Error occur when trying to read from file.");
 		}
-
 		return result;
 	}
 
 	public String instructionAssemble(String[] instruction) {
 		String result = "" ;
-		if (instruction[0] == "add") {
+		if (instruction[0].equals("add")) {
 			String [] op = translateOp("add");
 			result = op[0] + 
 					translateRegister(instruction[2]) +
@@ -142,14 +146,14 @@ public class Assembler {
 					"00000" +
 					op[1];
 		}
-		if (instruction[0] == "addi") {
+		if (instruction[0].equals("addi")) {
 			String [] op = translateOp("addi");
 			result = op[0] + 
 					translateRegister(instruction[2]) +
 					translateRegister(instruction[1]) +
 					translateIFormatNumber(instruction[3]);
 		}
-		if (instruction[0] == "sub") {
+		if (instruction[0].equals("sub")) {
 			String [] op = translateOp("sub");
 			result = op[0] + 
 					translateRegister(instruction[2]) +
@@ -158,7 +162,7 @@ public class Assembler {
 					"00000" +
 					op[1];
 		}
-		if (instruction[0] == "lw") {
+		if (instruction[0].equals("lw")) {
 			String [] op = translateOp("lw");
 			String temp = instruction[2];
 			String[] tempArray = temp.split("(");
@@ -170,7 +174,7 @@ public class Assembler {
 					translateRegister(instruction[1])+
 					translateIFormatNumber(tempNum);
 		}
-		if (instruction[0] == "lh") {
+		if (instruction[0].equals("lh")) {
 			String [] op = translateOp("lh");
 			String temp = instruction[2];
 			String[] tempArray = temp.split("(");
@@ -183,7 +187,7 @@ public class Assembler {
 					translateIFormatNumber(tempNum);
 			
 		}
-		if (instruction[0] == "lhu") {
+		if (instruction[0].equals("lhu")) {
 			String [] op = translateOp("lhu");
 			String temp = instruction[2];
 			String[] tempArray = temp.split("(");
@@ -196,7 +200,7 @@ public class Assembler {
 					translateIFormatNumber(tempNum);
 			
 		}
-		if (instruction[0] == "lb") {
+		if (instruction[0].equals("lb")) {
 			String [] op = translateOp("lb");
 			String temp = instruction[2];
 			String[] tempArray = temp.split("(");
@@ -208,7 +212,7 @@ public class Assembler {
 					translateRegister(instruction[1])+
 					translateIFormatNumber(tempNum);
 		}
-		if (instruction[0] == "lbu") {
+		if (instruction[0].equals("lbu")) {
 			String [] op = translateOp("lbu");
 			String temp = instruction[2];
 			String[] tempArray = temp.split("(");
@@ -220,7 +224,7 @@ public class Assembler {
 					translateRegister(instruction[1])+
 					translateIFormatNumber(tempNum);
 		}
-		if (instruction[0] == "sw") {
+		if (instruction[0].equals("sw")) {
 			String [] op = translateOp("lb");
 			String temp = instruction[2];
 			String[] tempArray = temp.split("(");
@@ -232,7 +236,7 @@ public class Assembler {
 					translateRegister(instruction[1])+
 					translateIFormatNumber(tempNum);
 		}
-		if (instruction[0] == "sh") {
+		if (instruction[0].equals("sh")) {
 			String [] op = translateOp("sh");
 			String temp = instruction[2];
 			String[] tempArray = temp.split("(");
@@ -244,7 +248,7 @@ public class Assembler {
 					translateRegister(instruction[1])+
 					translateIFormatNumber(tempNum);
 		}
-		if (instruction[0] == "sb") {
+		if (instruction[0].equals("sb")) {
 			String [] op = translateOp("sb");
 			String temp = instruction[2];
 			String[] tempArray = temp.split("(");
@@ -256,7 +260,7 @@ public class Assembler {
 					translateRegister(instruction[1])+
 					translateIFormatNumber(tempNum);
 		}
-		if (instruction[0] == "lui") {
+		if (instruction[0].equals("lui")) {
 			//result[0] = "001111";//after XXXXX
 			String [] op = translateOp("lui");
 			result = op[0] + 
@@ -265,7 +269,7 @@ public class Assembler {
 					translateIFormatNumber(instruction[2]);
 			
 		}
-		if (instruction[0] == "sll") {
+		if (instruction[0].equals("sll")) {
 			//result[0] = "000000";
 			//result[1] = "000000";
 			String [] op = translateOp("sll");
@@ -277,7 +281,7 @@ public class Assembler {
 					op[1];
 			
 		}
-		if (instruction[0] == "srl") {
+		if (instruction[0].equals("srl")) {
 			String [] op = translateOp("srl");
 			result = op[0] + 
 					"XXXXX" +
@@ -286,7 +290,7 @@ public class Assembler {
 					translateRFormatNumber(instruction[3]) +
 					op[1];
 		}
-		if (instruction[0] == "and") {
+		if (instruction[0].equals("and")) {
 			String [] op = translateOp("and");
 			result = op[0] + 
 					translateRegister(instruction[2]) +
@@ -295,14 +299,14 @@ public class Assembler {
 					"00000" +
 					op[1];
 		}
-		if (instruction[0] == "andi") {
+		if (instruction[0].equals("andi")) {
 			String [] op = translateOp("andi");
 			result = op[0] + 
 					translateRegister(instruction[2]) +
 					translateRegister(instruction[1]) +
 					translateIFormatNumber(instruction[3]);
 		}
-		if (instruction[0] == "or") {
+		if (instruction[0].equals("or")) {
 			String [] op = translateOp("or");
 			result = op[0] + 
 					translateRegister(instruction[2]) +
@@ -311,14 +315,14 @@ public class Assembler {
 					"00000" +
 					op[1];
 		}
-		if (instruction[0] == "ori") {
-			String [] op = translateOp("andi");
+		if (instruction[0].equals("ori")) {
+			String [] op = translateOp("ori");
 			result = op[0] + 
 					translateRegister(instruction[2]) +
 					translateRegister(instruction[1]) +
 					translateIFormatNumber(instruction[3]);
 		}
-		if (instruction[0] == "nor") {
+		if (instruction[0].equals("nor")) {
 			String [] op = translateOp("nor");
 			result = op[0] + 
 					translateRegister(instruction[2]) +
@@ -327,38 +331,38 @@ public class Assembler {
 					"00000" +
 					op[1];
 		}
-		if (instruction[0] == "beq") {
+		if (instruction[0].equals("beq")) {
 			String [] op = translateOp("beq");
 			result = op[0] + 
 					translateRegister(instruction[1]) +
 					translateRegister(instruction[2]) +
 					translateIFormatNumber(instruction[3]);
 		}
-		if (instruction[0] == "bne") {
+		if (instruction[0].equals("bne")) {
 			String [] op = translateOp("bne");
 			result = op[0] + 
 					translateRegister(instruction[1]) +
 					translateRegister(instruction[2]) +
 					translateIFormatNumber(instruction[3]);
 		}
-		if (instruction[0] == "j") {
+		if (instruction[0].equals("j")) {
 			String [] op = translateOp("j");
 			result = op[0] + 
 					translateJFormatNumber(instruction[1]);
 		}
-		if (instruction[0] == "jal") {
+		if (instruction[0].equals("jal")) {
 			String [] op = translateOp("jal");
 			result = op[0] + 
 					translateJFormatNumber(instruction[1]);
 		}
-		if (instruction[0] == "jr") {
+		if (instruction[0].equals("jr")) {
 			String [] op = translateOp("jr");
 			result = op[0] + 
 					translateRegister(instruction[1]) +
 					"000000000000000" +
 					op[1];
 		}
-		if (instruction[0] == "slt") {
+		if (instruction[0].equals("slt")) {
 			String [] op = translateOp("slt");
 			result = op[0] + 
 					translateRegister(instruction[2]) +
