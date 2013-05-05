@@ -54,46 +54,15 @@ public class Assembler {
 	}
 
 	public static void main(String[] args) {
-		// File input= new File("/Users/kareemali/Desktop/test.txt");
-		// FileInputStream fis=null;
-		// try {
-		// fis=new FileInputStream(input);
-		// } catch (FileNotFoundException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// try {
-		// System.out.println(fis.available());
-		// int content;
-		// while ((content = fis.read()) != -1) {
-		// // convert to char and display it
-		// System.out.print(content+",");
-		// }
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		//
+
 		Assembler assemb = new Assembler();
 
-		String[] temp =  assemb.assemble(new File("/Users/kareemali/Desktop/test.txt"));
+		String[] temp =  assemb.assemble(new File("/Users/kareemali/Desktop/test2.txt"));
 		
 		assemb.printAssembledInstruction(temp);
 		
-		System.out.println(countNumberOfLines(new File("/Users/kareemali/Desktop/test.txt")));
+		System.out.println(countNumberOfLines(new File("/Users/kareemali/Desktop/test2.txt")));
 		
-
-
-		//		System.out.println(assemb.translateRFormatNumber("32"));
-//		System.out
-//				.println(Integer.toBinaryString(((int) Math.pow(2.0, 15.0)) - 1));
-//		// System.out.println(Integer.toBinaryString(-1*(((int)Math.pow(2.0,
-//		// 16.0))1)));
-//		System.out.println(Integer.toBinaryString(-1
-//				* ((int) Math.pow(2.0, 15.0))));
-//		System.out.println("kareem".substring(0, "kareem".length()-1));
-//		System.out.println("25($sp)".split("\\(")[1]);
-
 	}
 
 	public void first_pass() {
@@ -111,6 +80,9 @@ public class Assembler {
 			while ((content = fis.read()) != -1) {
 				//System.out.println(content);
 				if (content != 10) {
+					if(separator == 0 && content == 35){
+						separator ++;
+					}
 					if (separator == 0 && content == 36) {
 						separator++;
 						instruction[separator] += "$";
@@ -373,10 +345,36 @@ public class Assembler {
 			result = op[0] + 
 					translateRegister(instruction[2]) +
 					translateRegister(instruction[3]) +
-					translateIFormatNumber(instruction[1]) +
+					translateRegister(instruction[1]) +
 					"00000" +
 					op[1];
 		}
+		if(instruction[0].equals("slti")){
+			String [] op = translateOp("slti");
+			result = op[0] +
+					translateRegister(instruction[2]) +
+					translateRegister(instruction[1]) +
+					translateIFormatNumber(instruction[3]);
+		}
+		if(instruction[0].equals("sltu")){
+			String [] op = translateOp("sltu");
+			result = op[0] +
+					translateRegister(instruction[2]) +
+					translateRegister(instruction[3]) +
+					translateRegister(instruction[1]) +
+ 					"00000" +
+					op[1];
+					
+		}
+		if(instruction[0].equals("sltui")){
+			String [] op = translateOp("sltui");
+			result = op[0] +
+					translateRegister(instruction[2]) +
+					translateRegister(instruction[1]) +
+					translateIFormatNumber(instruction[3]);
+					
+		}
+		
 		return result;
 		
 	}
@@ -582,6 +580,18 @@ public class Assembler {
 			//00000
 			result[1] = "101010";
 		}
+		if(instructionPart.equals("sltu")){
+			result[0] = "000000";
+			result[1] = "101011";
+		}
+		if(instructionPart.equals("slti")){
+			result[0] = "001010";
+		}
+		if(instructionPart.equals("sltui")){
+			result[0] = "001011";
+		}
+		
+		
 		return result;
 	}
 
@@ -617,8 +627,12 @@ public class Assembler {
 	}
 	
 	public String translateJFormatNumber(String num){
-		int result = Integer.parseInt(num);
+		
+		int result = Integer.parseInt(num.substring(1));
 		String resultString = Integer.toBinaryString(result);
+		if(resultString.length()>26){
+			resultString = resultString.substring(6);
+		}
 		while(resultString.length()<26){
 			resultString = "0"+ resultString;
 		}
@@ -645,5 +659,9 @@ public class Assembler {
 			e.printStackTrace();
 		}
 		return linesCount;
+	}
+	
+	public static void linker(File file){
+		
 	}
 }
