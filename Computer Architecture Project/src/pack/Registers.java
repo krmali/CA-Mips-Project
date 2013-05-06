@@ -55,10 +55,16 @@ public class Registers {
 
 	public void writeByNumber(String regNum, String content) {
 		int regNumber = integerValueOf(regNum);
+		if(regNumber == 0){
+			content = "00000000000000000000000000000000";
+		}
 		reg[regNumber].setContent(content);
 	}
 
 	public void writeByName(String regName, String content) {
+		if(regName.equals("zero")){
+			content = "00000000000000000000000000000000";
+		}
 		for (int i = 0; i < reg.length; i++) {
 			if (reg[i].getName().equals(regName)) {
 				reg[i].setContent(content);
