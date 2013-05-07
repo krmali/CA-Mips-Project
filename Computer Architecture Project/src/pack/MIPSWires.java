@@ -17,7 +17,7 @@ public class MIPSWires {
 	public static String regWriteData;
 	
 	
-	public static String RegDist;
+	public static String RegDst;
 	public static String Branch;
 	public static String MemRead;
 	public static String MemtoReg;
