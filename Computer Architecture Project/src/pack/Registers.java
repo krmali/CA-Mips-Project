@@ -1,7 +1,14 @@
 package pack;
 
 public class Registers {
-	private SingleRegister[] reg;
+	SingleRegister[] reg;
+	String regWrite;
+	String rs;
+	String rt;
+	String rd;
+	String writeData;
+	String outPutData1;
+	String outPutData2;
 
 	public Registers() {
 		reg[0].setName("zero");

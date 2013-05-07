@@ -1,16 +1,16 @@
 package pack;
 
 public class Control {
-	private boolean RegDist;
-	private boolean Branch;
-	private boolean MemRead;
-	private boolean MemtoReg;
-	private boolean ALUOp1;
-	private boolean ALUOp0;
-	private boolean MemWrite;
-	private boolean ALUsrc;
-	private boolean RegWrite;
-	private boolean Jump;
+	String RegDist = "0";
+	String Branch = "0";
+	String MemRead = "0";
+	String MemtoReg = "0";
+	String ALUOp1 = "0";
+	String ALUOp0 = "0";
+	String MemWrite = "0";
+	String ALUsrc = "0";
+	String RegWrite = "0";
+	String Jump = "0";
 
 	public Control(String opcode) {
 		// R-type instructions
@@ -23,9 +23,9 @@ public class Control {
 				|| opcode.equals("000010") // srl opcode
 				|| opcode.equals("101010"))// slt opcode
 		{
-			RegDist = true;
-			RegWrite = true;
-			ALUOp1 = true;
+			RegDist = "1";
+			RegWrite = "1";
+			ALUOp1 = "1";
 		}
 		// load instructions
 		else if (opcode.equals("100011") // lw opcode
@@ -35,79 +35,79 @@ public class Control {
 				|| opcode.equals("100100") // lbu opcode
 				|| opcode.equals("001111")) // lui opcode
 		{
-			MemRead = true;
-			MemtoReg = true;
-			RegWrite = true;
-			ALUsrc = true;
+			MemRead = "1";
+			MemtoReg = "1";
+			RegWrite = "1";
+			ALUsrc = "1";
 		}
 		// store instructions
 		else if (opcode.equals("101011") // sw opcode
 				|| opcode.equals("101001") // sh opcode
 				|| opcode.equals("101000")) // sb opcode
 		{
-			MemWrite = true;
-			ALUsrc = true;
+			MemWrite = "1";
+			ALUsrc = "1";
 		}
 		// branch instructions
 		else if (opcode.equals("000100") // beq opcode
 				|| opcode.equals("000101")) // bne opcode
 		{
-			Branch = true;
-			ALUOp0 = true;
+			Branch = "1";
+			ALUOp0 = "1";
 			// I-type instructions
 		} else if (opcode.equals("001000") // addi opcode
 				|| opcode.equals("001100") // andi opcode
 				|| opcode.equals("001101")) // ori opcode
 		{
-			RegWrite = true;
-			ALUsrc = true;
+			RegWrite = "1";
+			ALUsrc = "1";
 		}
 		// jump instructions
 		else if (opcode.equals("000010") // j opcode
 				|| opcode.equals("000011") // jal opcode
 				|| opcode.equals("001000")) // jr opcode
 		{
-			Jump = true;
+			Jump = "1";
 		}
 	}
 
-	public boolean RegDist() {
+	public String RegDist() {
 		return RegDist;
 	}
 
-	public boolean Branch() {
+	public String Branch() {
 		return Branch;
 	}
 
-	public boolean MemRead() {
+	public String MemRead() {
 		return MemRead;
 	}
 
-	public boolean MemtoReg() {
+	public String MemtoReg() {
 		return MemtoReg;
 	}
 
-	public boolean ALUOp1() {
+	public String ALUOp1() {
 		return ALUOp1;
 	}
 
-	public boolean ALUOp0() {
+	public String ALUOp0() {
 		return ALUOp0;
 	}
 
-	public boolean MemWrite() {
+	public String MemWrite() {
 		return MemWrite;
 	}
 
-	public boolean ALUsrc() {
+	public String ALUsrc() {
 		return ALUsrc;
 	}
 
-	public boolean RegWrite() {
+	public String RegWrite() {
 		return RegWrite;
 	}
 
-	public boolean Jump() {
+	public String Jump() {
 		return Jump;
 	}
 
