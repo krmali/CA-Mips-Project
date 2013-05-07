@@ -26,5 +26,6 @@ public class MIPSWires {
 	public static String Jump;
 	public static String ALUOp;
 	public static String rd2;
+	public static String AluControlOutput;
 
 }
