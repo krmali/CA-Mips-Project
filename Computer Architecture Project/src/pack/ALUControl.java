@@ -9,6 +9,7 @@ public class ALUControl {
 	HashMap<String, String> possibleInputs;
 
 	public ALUControl() {
+		ALUOp = MIPSWires.ALUOp;
 		possibleInputs = new HashMap<String, String>();
 	}
 
@@ -26,7 +27,7 @@ public class ALUControl {
 	}
 
 	public void ALUControlOutput() {
-		AluControlOutput = possibleInputs.get(ALUOp);
+		MIPSWires.AluControlOutput = possibleInputs.get(ALUOp);
 	}
 
 }

@@ -15,17 +15,17 @@ public class MIPSWires {
 	public static String zero;
 	public static String aluOut;
 	public static String regWriteData;
-	public static String IFCOntrol;
+	
+	
 	public static String RegDist;
 	public static String Branch;
 	public static String MemRead;
 	public static String MemtoReg;
-	public static String ALUOp1;
-	public static String ALUOp0;
 	public static String MemWrite;
 	public static String ALUsrc;
 	public static String RegWrite;
 	public static String Jump;
-	
+	public static String AluControlOutput;
+	public static String ALUOp;
 
 }

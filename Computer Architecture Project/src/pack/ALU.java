@@ -5,13 +5,11 @@ public class ALU {
 	String input1;
 	String input2;
 	String aluControlInput;
-	String aluOutput;
-	String zeroOutput;
 
-	public void ALUInput(String input1, String input2, String aluControlInput) {
-		this.input1 = input1;
-		this.input2 = input2;
-		this.aluControlInput = aluControlInput;
+	public void ALUInput() {
+		this.input1 = MIPSWires.aluIn1;
+		this.input2 = MIPSWires.aluIn2; 
+		this.aluControlInput = MIPSWires.AluControlOutput;
 	}
 
 	public void process() {
@@ -37,7 +35,7 @@ public class ALU {
 		while (result.length() < 32) {
 			result = "0" + result;
 		}
-		aluOutput = result;
+		MIPSWires.aluOut = result;
 	}
 
 	private void or(String input1, String input2) {
@@ -47,7 +45,7 @@ public class ALU {
 		while (result.length() < 32) {
 			result = "0" + result;
 		}
-		aluOutput = result;
+		MIPSWires.aluOut = result;
 	}
 
 	private void add(String input1, String input2) {
@@ -57,7 +55,7 @@ public class ALU {
 		while (result.length() < 32) {
 			result = "0" + result;
 		}
-		aluOutput = result;
+		MIPSWires.aluOut = result;
 	}
 
 	// private static String add2(String input1, String input2) {
@@ -77,16 +75,16 @@ public class ALU {
 		while (result.length() < 32) {
 			result = "0" + result;
 		}
-		aluOutput = result;
+		MIPSWires.aluOut = result;
 	}
 
 	private void setOnLessThan(String input1, String input2) {
 		int num1 = integerValueOf(input1);
 		int num2 = integerValueOf(input2);
 		if (num1 < num2) {
-			zeroOutput = "1";
+			MIPSWires.zero = "1";
 		} else {
-			zeroOutput = "0";
+			MIPSWires.zero = "0";
 
 		}
 	}
@@ -98,7 +96,7 @@ public class ALU {
 		while (result.length() < 32) {
 			result = "0" + result;
 		}
-		aluOutput = result;
+		MIPSWires.aluOut = result;
 	}
 
 	public static int integerValueOf(String binaryString) {
@@ -143,12 +141,12 @@ public class ALU {
 		// System.out.println(Integer.toBinaryString(8+-1));
 
 		ALU alu = new ALU();
-		alu.ALUInput("11101110000011111000001111100000",
-				"00001110111010011011101001101010", "add");
+		//alu.ALUInput("11101110000011111000001111100000",
+			//	"00001110111010011011101001101010", "add");
 		alu.process();
 		System.out
 				.println("11111110000011111000001111100000\n00011110111010011011101001101010\n-----------");
-		System.out.println(alu.aluOutput + "\n" + alu.zeroOutput);
+		//System.out.println(alu.aluOutput + "\n" + alu.zeroOutput);
 
 		System.out.println(integerValueOf("11101110000011111000001111100000")
 				+ "\n" + integerValueOf("00001110111010011011101001101010")
