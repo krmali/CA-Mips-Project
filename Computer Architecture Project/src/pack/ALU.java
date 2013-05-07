@@ -13,17 +13,17 @@ public class ALU {
 	}
 
 	public void process() {
-		if (aluControlInput == "and") {
+		if (aluControlInput.equals("and")) {
 			and(input1, input2);
-		} else if (aluControlInput == "or") {
+		} else if (aluControlInput.equals("or")) {
 			or(input1, input2);
-		} else if (aluControlInput == "add") {
+		} else if (aluControlInput.equals("add")) {
 			add(input1, input2);
-		} else if (aluControlInput == "subtract") {
+		} else if (aluControlInput.equals("subtract")) {
 			subtract(input1, input2);
-		} else if (aluControlInput == "slt") {
+		} else if (aluControlInput.equals("slt")) {
 			setOnLessThan(input1, input2);
-		} else if (aluControlInput == "nor") {
+		} else if (aluControlInput.equals("nor")) {
 			nor(input1, input2);
 		}
 	}
