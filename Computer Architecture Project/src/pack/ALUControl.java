@@ -11,6 +11,9 @@ public class ALUControl {
 	public ALUControl() {
 		ALUOp = MIPSWires.ALUOp;
 		possibleInputs = new HashMap<String, String>();
+		ALUIControlInput(ALUOp);
+		process();
+		ALUControlOutput();
 	}
 
 	public void ALUIControlInput(String ALUOp) {
@@ -27,7 +30,40 @@ public class ALUControl {
 	}
 
 	public void ALUControlOutput() {
-		MIPSWires.AluControlOutput = possibleInputs.get(ALUOp);
+		if(ALUOp.equals("00")){
+			MIPSWires.AluControlOutput = possibleInputs.get("0010");
+		}
+		else if (ALUOp.equals("01")){
+			MIPSWires.AluControlOutput = possibleInputs.get("0110");
+		}
+		else if (ALUOp.equals("10")){
+			String temp = MIPSWires.toSignExtend.substring(10);
+			if(temp.equals("100000")){
+				MIPSWires.AluControlOutput = possibleInputs.get("0010");
+			}
+			else if(temp.equals("100010")){
+				MIPSWires.AluControlOutput = possibleInputs.get("0110");
+			}
+			else if (temp.equals("100100")) {
+				MIPSWires.AluControlOutput = possibleInputs.get("0000");
+			}
+			else if (temp.equals("100101")) {
+				MIPSWires.AluControlOutput = possibleInputs.get("0001");
+			}
+			else if (temp.equals("101010")) {
+				MIPSWires.AluControlOutput = possibleInputs.get("0111");
+			}
+		}
+		printMIPSWires();
 	}
+	
+	public void printMIPSWires(){
+		System.out.println("\n========================ALUCONTROL=============================");
+		System.out.println("ALUOp: "+ this.ALUOp);
+		System.out.println("Function: "+ MIPSWires.toSignExtend.substring(10));
+		System.out.println("ALU control signal to ALU: "+ MIPSWires.AluControlOutput);
+		System.out.println("=================================================================\n");
+	}
+	
 
 }

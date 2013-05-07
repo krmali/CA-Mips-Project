@@ -29,11 +29,13 @@ public class BranchAdder {
 		MIPSWires.pcIn = MIPSWires.Jump == "0" ? MIPSWires.pcOut : jumpInput;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(Integer.toBinaryString(Integer
-				.parseInt(((new BigInteger("001001", 2)).add(new BigInteger(
-						"101001", 2))).toString())));
-
+	
+	public void printMIPSWires(){
+		System.out.println("===========================BRANCH and JUMP========================");
+		System.out.println("jump Address: "+MIPSWires.jumpAdrs);
+		System.out.println("incremented PC: "+MIPSWires.pcOut);
+		System.out.println("PC for the next instruction: "+MIPSWires.pcIn);
+		System.out.println("==================================================================");
 	}
 
 }

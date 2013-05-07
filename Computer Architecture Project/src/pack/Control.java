@@ -61,6 +61,20 @@ public class Control {
 		{
 			MIPSWires.Jump = "1";
 		}
+		printMIPSWires();
+	}
+	public void printMIPSWires(){
+		System.out.println("\n======================CONTROL UNIT===================");
+		System.out.println("RegDst: "+ MIPSWires.RegDst);
+		System.out.println("Branch: "+MIPSWires.Branch);
+		System.out.println("MemRead: "+MIPSWires.MemRead);
+		System.out.println("MemtoReg: "+MIPSWires.MemtoReg);
+		System.out.println("MEmWrite: "+MIPSWires.MemWrite);
+		System.out.println("ALUsrc: "+MIPSWires.ALUsrc);
+		System.out.println("RegWrite: "+MIPSWires.RegWrite);
+		System.out.println("Jump: "+MIPSWires.Jump);
+		System.out.println("ALUOp: "+MIPSWires.ALUOp);
+		System.out.println("======================================================");
 	}
 
 }
