@@ -2,13 +2,6 @@ package pack;
 
 public class Registers {
 	SingleRegister[] reg;
-	String regWrite;
-	String rs;
-	String rt;
-	String rd;
-	String writeData;
-	String outPutData1;
-	String outPutData2;
 
 	public Registers() {
 		reg[0].setName("zero");
@@ -60,40 +53,28 @@ public class Registers {
 		}
 	}
 
-	public void writeByNumber(String regNum, String content) {
-		int regNumber = integerValueOf(regNum);
-		if (regNumber == 0) {
-			content = "00000000000000000000000000000000";
+	public void write() {
+		int writeRegNum;
+		if(MIPSWires.RegDst.equals("0")){
+			writeRegNum = integerValueOf(MIPSWires.rReg2);
 		}
-		reg[regNumber].setContent(content);
+		else{
+			writeRegNum = integerValueOf(MIPSWires.wReg);
+		}
+		reg[writeRegNum].setContent(MIPSWires.regWriteData);
 	}
 
-	public void writeByName(String regName, String content) {
-		if (regName.equals("zero")) {
-			content = "00000000000000000000000000000000";
+
+	public void read() {
+		MIPSWires.aluIn1 = MIPSWires.rReg1;
+		if(MIPSWires.ALUsrc.equals("0")){
+			MIPSWires.aluIn2 = MIPSWires.rReg2;
 		}
-		for (int i = 0; i < reg.length; i++) {
-			if (reg[i].getName().equals(regName)) {
-				reg[i].setContent(content);
-				break;
-			}
+		else{
+			MIPSWires.aluIn2 = MIPSWires.toShift2;
 		}
 	}
 
-	public String readByNumber(String regNum) {
-		int regNumber = integerValueOf(regNum);
-		return reg[regNumber].getContent();
-	}
-
-	public String readByName(String regName) {
-		int i;
-		for (i = 0; i < reg.length; i++) {
-			if (reg[i].getName().equals(regName)) {
-				break;
-			}
-		}
-		return reg[i].getContent();
-	}
 
 	public int getRegNumber(String regName) {
 		int i;
