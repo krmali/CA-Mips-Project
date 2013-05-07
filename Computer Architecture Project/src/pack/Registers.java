@@ -54,6 +54,7 @@ public class Registers {
 	}
 
 	public void write() {
+		MIPSWires.rd2 = reg[integerValueOf(MIPSWires.rReg2)].getContent();
 		int writeRegNum;
 		if(MIPSWires.RegDst.equals("0")){
 			writeRegNum = integerValueOf(MIPSWires.rReg2);
