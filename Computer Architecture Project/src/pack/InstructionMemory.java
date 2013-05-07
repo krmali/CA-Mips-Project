@@ -12,6 +12,19 @@ public class InstructionMemory {
 		program_counter = 0;
 	}
 	
+	public void processInstructionMemory() {
+		program_counter = Integer.parseInt(MIPSWires.pcIn);
+		String instruction = read_current_instruction();
+		MIPSWires.control = instruction.substring(0,6);
+		MIPSWires.rReg1 = instruction.substring(6,11);
+		MIPSWires.rReg2 = instruction.substring(11,16);
+		MIPSWires.wReg = instruction.substring(16,21);
+		MIPSWires.toSignExtend = instruction.substring(17,32);
+		MIPSWires.jumpAdrs = instruction.substring(6,32);
+		incPC();
+		MIPSWires.pcOut = program_counter + "";
+	}
+	
 	public String read_inst_mem(int address) {
 		if (address >= 0 && address < size - 3) {
 			return instruction_mem[address] + instruction_mem[address + 1]
@@ -34,33 +47,8 @@ public class InstructionMemory {
 		return read_inst_mem(program_counter);
 	}
 	
-	public void inc_pc() {
+	public void incPC() {
 		program_counter += 4;
-	}
-	
-	public String wire1() {
-		String instruction = read_inst_mem(program_counter);
-		return instruction.substring(0,6);
-	}
-	
-	public String wire2() {
-		String instruction = read_inst_mem(program_counter);
-		return instruction.substring(6,11);
-	}
-	
-	public String wire3() {
-		String instruction = read_inst_mem(program_counter);
-		return instruction.substring(11,16);
-	}
-	
-	public String wire4() {
-		String instruction = read_inst_mem(program_counter);
-		return instruction.substring(16,21);
-	}
-	
-	public String wire5() {
-		String instruction = read_inst_mem(program_counter);
-		return instruction.substring(17,32);
 	}
 
 }
