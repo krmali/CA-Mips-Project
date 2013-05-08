@@ -54,6 +54,9 @@ public class ALUControl {
 			else if (temp.equals("101010")) {
 				MIPSWires.AluControlOutput = possibleInputs.get("0111");
 			}
+			else if(temp.equals("100111")){
+				MIPSWires.AluControlOutput = possibleInputs.get("1100");
+			}
 			else if(temp.equals("000000")){
 				MIPSWires.AluControlOutput = "sll";
 			}

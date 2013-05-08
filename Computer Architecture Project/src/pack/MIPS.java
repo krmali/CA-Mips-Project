@@ -27,7 +27,7 @@ public class MIPS {
 	public static void startSimulation() {
 		InstructionMemory im = new InstructionMemory(32);
 		MIPSWires.pcIn = "00000000000000000000";
-		im.write_inst_mem("00000001011010100100100000100010", 0);
+		im.write_inst_mem("00000001001010100100000000101010", 0);
 		im.processInstructionMemory();
 		Control c = new Control();
 		Registers rg = new Registers();
