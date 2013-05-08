@@ -107,7 +107,10 @@ public class ALU {
 			result = "0" + result;
 		}
 		MIPSWires.aluOut = result;
-		if(num1-num2 < 0){
+		if(num1 != num2 && MIPSWires.control.equals("000101")){
+			MIPSWires.zero = "1";
+		}
+		else if(num1 == num2 && MIPSWires.control.equals("000100")){
 			MIPSWires.zero = "1";
 		}
 		else{

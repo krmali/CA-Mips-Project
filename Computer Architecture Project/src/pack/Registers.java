@@ -70,7 +70,7 @@ public class Registers {
 					.getContent();
 		}
 		if (MIPSWires.ALUsrc.equals("0") && !(MIPSWires.toSignExtend.substring(10).equals("000000") || MIPSWires.toSignExtend
-				.substring(10).equals("000010"))) {
+				.substring(10).equals("000010")) || MIPSWires.Branch.equals("1") ) {
 			MIPSWires.aluIn2 = reg[integerValueOf(MIPSWires.rReg2)]
 					.getContent();
 		} else if ((MIPSWires.toSignExtend.substring(10).equals("000000") || MIPSWires.toSignExtend
