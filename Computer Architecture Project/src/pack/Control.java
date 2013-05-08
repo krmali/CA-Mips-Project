@@ -5,14 +5,8 @@ public class Control {
 	public Control() {
 		String opcode = MIPSWires.control;
 		// R-type instructions
-		if (opcode.equals("100000")// add opcode
-				|| opcode.equals("100010")// sub opcode
-				|| opcode.equals("100100") // and opcode
-				|| opcode.equals("100101")// or opcode
-				|| opcode.equals("100111") // nor opcode
-				|| opcode.equals("000000") // sll opcode
-				|| opcode.equals("000010") // srl opcode
-				|| opcode.equals("101010"))// slt opcode
+		if (opcode.equals("000000")// add, or, sll, slt, srl, sub, and opcode
+				|| opcode.equals("100111")) // nor opcode
 		{
 			MIPSWires.RegDst = "1";
 			MIPSWires.RegWrite = "1";
@@ -57,24 +51,27 @@ public class Control {
 		// jump instructions
 		else if (opcode.equals("000010") // j opcode
 				|| opcode.equals("000011") // jal opcode
-				|| opcode.equals("001000")) // jr opcode
+				|| opcode.equals("000000")) // jr opcode
 		{
 			MIPSWires.Jump = "1";
 		}
 		printMIPSWires();
 	}
-	public void printMIPSWires(){
-		System.out.println("\n======================CONTROL UNIT===================");
-		System.out.println("RegDst: "+ MIPSWires.RegDst);
-		System.out.println("Branch: "+MIPSWires.Branch);
-		System.out.println("MemRead: "+MIPSWires.MemRead);
-		System.out.println("MemtoReg: "+MIPSWires.MemtoReg);
-		System.out.println("MEmWrite: "+MIPSWires.MemWrite);
-		System.out.println("ALUsrc: "+MIPSWires.ALUsrc);
-		System.out.println("RegWrite: "+MIPSWires.RegWrite);
-		System.out.println("Jump: "+MIPSWires.Jump);
-		System.out.println("ALUOp: "+MIPSWires.ALUOp);
-		System.out.println("======================================================");
+
+	public void printMIPSWires() {
+		System.out
+				.println("\n======================CONTROL UNIT===================");
+		System.out.println("RegDst: " + MIPSWires.RegDst);
+		System.out.println("Branch: " + MIPSWires.Branch);
+		System.out.println("MemRead: " + MIPSWires.MemRead);
+		System.out.println("MemtoReg: " + MIPSWires.MemtoReg);
+		System.out.println("MEmWrite: " + MIPSWires.MemWrite);
+		System.out.println("ALUsrc: " + MIPSWires.ALUsrc);
+		System.out.println("RegWrite: " + MIPSWires.RegWrite);
+		System.out.println("Jump: " + MIPSWires.Jump);
+		System.out.println("ALUOp: " + MIPSWires.ALUOp);
+		System.out
+				.println("======================================================");
 	}
 
 }
