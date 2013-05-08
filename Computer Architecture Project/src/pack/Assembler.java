@@ -547,13 +547,12 @@ public class Assembler {
 	}
 
 	public String translateRFormatNumber(String num) {
-		if (Integer.parseInt(num) > 31) {
+		if (Integer.parseInt(num) > 31 || Integer.parseInt(num) < 0) {
 			return "00000";
 		}
 		String resultString = Integer.toBinaryString(Integer.parseInt(num));
-		if (resultString.length() < 5) {
+		while (resultString.length() < 5) {
 			resultString = "0" + resultString;
-
 		}
 		return resultString;
 	}

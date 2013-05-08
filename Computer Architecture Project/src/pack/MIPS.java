@@ -11,7 +11,7 @@ public class MIPS {
 		return bin.substring(2) + "00";
 	}
 
-	public String signExtend(String bin) {
+	public static String signExtend(String bin) {
 		return (bin.charAt(0) == '0') ? "0000000000000000" + bin
 				: "1111111111111111" + bin;
 	}
@@ -27,7 +27,7 @@ public class MIPS {
 	public static void startSimulation() {
 		InstructionMemory im = new InstructionMemory(32);
 		MIPSWires.pcIn = "00000000000000000000";
-		im.write_inst_mem("00000001010010110100100000100010", 0);
+		im.write_inst_mem("00000001011010100100100000100010", 0);
 		im.processInstructionMemory();
 		Control c = new Control();
 		Registers rg = new Registers();
