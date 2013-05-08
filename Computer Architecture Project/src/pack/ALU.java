@@ -79,7 +79,6 @@ public class ALU {
 	}
 
 	private void add(String input1, String input2) {
-		System.out.println(input1+" ########### "+input2);
 		int num1 = integerValueOf(input1);
 		int num2 = integerValueOf(input2);
 		String result = Integer.toBinaryString(num1 + num2);
@@ -108,16 +107,21 @@ public class ALU {
 			result = "0" + result;
 		}
 		MIPSWires.aluOut = result;
+		if(num1-num2 < 0){
+			MIPSWires.zero = "1";
+		}
+		else{
+			MIPSWires.zero = "0";
+		}
 	}
 
 	private void setOnLessThan(String input1, String input2) {
 		int num1 = integerValueOf(input1);
 		int num2 = integerValueOf(input2);
 		if (num1 < num2) {
-			MIPSWires.zero = "1";
+			MIPSWires.aluOut = "00000000000000000000000000000001";
 		} else {
-			MIPSWires.zero = "0";
-
+			MIPSWires.aluOut = "00000000000000000000000000000000";
 		}
 	}
 

@@ -182,7 +182,7 @@ public class Assembler {
 		if (instruction[0].equals("lbu")) {
 			String[] op = translateOp("lbu");
 			String temp = instruction[2];
-			String[] tempArray = temp.split("(");
+			String[] tempArray = temp.split("\\(");
 			temp = tempArray[tempArray.length - 1];
 			String tempNum = tempArray[0];
 			temp = temp.substring(0, temp.length() - 1);
