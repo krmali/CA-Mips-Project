@@ -47,6 +47,7 @@ public class Control {
 		{
 			MIPSWires.RegWrite = "1";
 			MIPSWires.ALUsrc = "1";
+			MIPSWires.ALUOp = "10";
 		}
 		// jump instructions
 		else if (opcode.equals("000010") // j opcode

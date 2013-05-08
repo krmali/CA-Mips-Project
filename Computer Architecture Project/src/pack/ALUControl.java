@@ -38,7 +38,14 @@ public class ALUControl {
 		}
 		else if (ALUOp.equals("10")){
 			String temp = MIPSWires.toSignExtend.substring(10);
-			String temp2 = MIPSWires.toShift2.substring(26);
+			if(MIPSWires.control.equals("001100")){
+				MIPSWires.AluControlOutput = "and";
+				return;
+			}
+			if(MIPSWires.control.equals("001101")){
+				MIPSWires.AluControlOutput = "or";
+				return;
+			}
 			if(temp.equals("100000")){
 				MIPSWires.AluControlOutput = possibleInputs.get("0010");
 			}
