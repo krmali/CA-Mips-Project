@@ -44,16 +44,7 @@ public class Registers {
 	}
 
 	public static int integerValueOf(String binaryString) {
-		if (binaryString.charAt(0) == '1') {
-			String result = binaryString;
-			result = result.replace('0', '2');
-			result = result.replace('1', '0');
-			result = result.replace('2', '1');
-			int num = Integer.parseInt(result, 2) + 1;
-			return -num;
-		} else {
 			return Integer.parseInt(binaryString, 2);
-		}
 	}
 
 	public void write() {
