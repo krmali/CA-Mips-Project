@@ -22,12 +22,13 @@ public class MIPS {
 			rg.reg[i].setContent(temp);
 			temp = ALU.adding(temp, "01");
 		}
+		rg.reg[29].setContent("00000000000000000000000000000100");
 	}
 
-	public static void startSimulation() {
+	public static void startSimulation() throws NumberFormatException, Exception {
 		InstructionMemory im = new InstructionMemory(32);
 		MIPSWires.pcIn = "00000000000000000000";
-		im.write_inst_mem("00000001011010100100100000100010", 0);
+		im.write_inst_mem("10101111101100000000000000000000", 0);
 		im.processInstructionMemory();
 		Control c = new Control();
 		Registers rg = new Registers();
@@ -40,7 +41,7 @@ public class MIPS {
 		rg.write();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NumberFormatException, Exception {
 		System.out
 				.println("*************************************************MIPS SIMULATION*************************************************");
 		startSimulation();
