@@ -27,7 +27,4 @@ public class MIPSWires {
 	public static String ALUOp = "00";
 	public static String rd2 = "00000000000000000000000000000000";
 	public static String AluControlOutput = "0000";
-	
-	
-
 }
