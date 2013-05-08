@@ -8,17 +8,19 @@ public class BranchAdder {
 
 	public BranchAdder() {
 		this.jumpInput = MIPSWires.jumpAdrs;
+		incrementedAddress = MIPSWires.pcOut;
 		branch();
 		printMIPSWires();
 	}
 
 	public void branch(){
-		incrementedAddress = MIPSWires.pcOut;
-		String temp = MIPSWires.toSignExtend;
-		temp = temp.substring(2)+"00";
-		String result = addBinaryString(incrementedAddress, temp);
-		boolean branchAnd = (MIPSWires.zero == "1" && MIPSWires.Branch == "1")? true : false;
-		MIPSWires.pcIn = branchAnd? result : incrementedAddress ;
+		if(MIPSWires.Branch.equals("1")){
+			String temp = MIPSWires.toSignExtend;
+			temp = temp.substring(2)+"00";
+			String result = addBinaryString(incrementedAddress, temp);
+			boolean branchAnd = (MIPSWires.zero == "1" && MIPSWires.Branch == "1")? true : false;
+			MIPSWires.pcIn = branchAnd? result : incrementedAddress ;
+		}
 		processJump();
 	}
 	
@@ -47,6 +49,12 @@ public class BranchAdder {
 		if(MIPSWires.Jump.equals("1")){
 			jumpInput = MIPSWires.pcOut.substring(0, 4) + jumpInput + "00";
 			MIPSWires.pcIn = MIPSWires.Jump == "0" ? MIPSWires.pcIn : jumpInput;
+		}
+		if(MIPSWires.control.equals("000011")){
+			MIPSWires.RegWrite = "1";
+			MIPSWires.RegDst = "1";
+			MIPSWires.wReg = "11110";
+			MIPSWires.aluOut = incrementedAddress;
 		}
 	}
 
