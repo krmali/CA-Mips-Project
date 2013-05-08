@@ -1,10 +1,10 @@
 package pack;
 
 public class Registers {
-	SingleRegister[] reg =  new SingleRegister[31];
+	SingleRegister[] reg = new SingleRegister[31];
 
 	public Registers() {
-		for (int j = 0; j<reg.length ; j++){
+		for (int j = 0; j < reg.length; j++) {
 			reg[j] = new SingleRegister();
 		}
 		reg[0].setName("zero");
@@ -57,12 +57,11 @@ public class Registers {
 	}
 
 	public void write() {
-		if(MIPSWires.RegWrite.equals("1")){
+		if (MIPSWires.RegWrite.equals("1")) {
 			int writeRegNum;
-			if(MIPSWires.RegDst.equals("0")){
+			if (MIPSWires.RegDst.equals("0")) {
 				writeRegNum = integerValueOf(MIPSWires.rReg2);
-			}
-			else{
+			} else {
 				writeRegNum = integerValueOf(MIPSWires.wReg);
 			}
 			reg[writeRegNum].setContent(MIPSWires.regWriteData);
@@ -70,18 +69,31 @@ public class Registers {
 		printMIPSWires();
 	}
 
-
 	public void read() {
 		MIPSWires.rd2 = reg[integerValueOf(MIPSWires.rReg2)].getContent();
-		MIPSWires.aluIn1 = reg[integerValueOf(MIPSWires.rReg1)].getContent() ;
-		if(MIPSWires.ALUsrc.equals("0")){
-			MIPSWires.aluIn2 = reg[integerValueOf(MIPSWires.rReg2)].getContent() ;
+		if (!MIPSWires.rReg1.equals("XXXXX")) {
+			MIPSWires.aluIn1 = reg[integerValueOf(MIPSWires.rReg1)]
+					.getContent();
+		} else {
+			MIPSWires.aluIn1 = reg[integerValueOf(MIPSWires.rReg2)]
+					.getContent();
 		}
-		else{
+		if (MIPSWires.ALUsrc.equals("0") && !(MIPSWires.toSignExtend.substring(10).equals("000000") || MIPSWires.toSignExtend
+				.substring(10).equals("000010"))) {
+			MIPSWires.aluIn2 = reg[integerValueOf(MIPSWires.rReg2)]
+					.getContent();
+		} else if ((MIPSWires.toSignExtend.substring(10).equals("000000") || MIPSWires.toSignExtend
+				.substring(10).equals("000010"))
+				&& MIPSWires.control.equals("000000")) {
+			MIPSWires.toShift2 = MIPS.signExtend(MIPSWires.toSignExtend);
+			MIPSWires.aluIn2 = MIPSWires.toShift2;
+		}
+
+		else {
+			MIPSWires.toShift2 = MIPS.signExtend(MIPSWires.toSignExtend);
 			MIPSWires.aluIn2 = MIPSWires.toShift2;
 		}
 	}
-
 
 	public int getRegNumber(String regName) {
 		int i;
@@ -92,20 +104,24 @@ public class Registers {
 		}
 		return i;
 	}
-	
-	public void printMIPSWires(){
-		System.out.println("============================RegisterFile=====================");
-		System.out.println("alu input 1: "+MIPSWires.aluIn1);
-		System.out.println("alu input 2: "+MIPSWires.aluIn2);
-		System.out.println("memory write data: "+MIPSWires.rd2);
-		System.out.println("=================================Registers contents after write==============");
-		for(int i = 0; i<reg.length;i++){
-			System.out.print(reg[i].getName() + " : " + reg[i].getContent()+"\t");
-			if(i%3 == 0){
+
+	public void printMIPSWires() {
+		System.out
+				.println("============================RegisterFile=====================");
+		System.out.println("alu input 1: " + MIPSWires.aluIn1);
+		System.out.println("alu input 2: " + MIPSWires.aluIn2);
+		System.out.println("memory write data: " + MIPSWires.rd2);
+		System.out
+				.println("=================================Registers contents after write==============");
+		for (int i = 0; i < reg.length; i++) {
+			System.out.print(reg[i].getName() + " : " + reg[i].getContent()
+					+ "\t");
+			if (i % 3 == 0) {
 				System.out.println();
 			}
 		}
-		System.out.println("=============================================================================");
+		System.out
+				.println("=============================================================================");
 	}
 
 	public String getRegName(String regNum) {
