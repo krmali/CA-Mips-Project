@@ -1,7 +1,7 @@
 package pack;
 
 public class Registers {
-	SingleRegister[] reg = new SingleRegister[31];
+	SingleRegister[] reg = new SingleRegister[32];
 
 	public Registers() {
 		for (int j = 0; j < reg.length; j++) {
@@ -34,10 +34,11 @@ public class Registers {
 		reg[24].setName("t8");
 		reg[25].setName("t9");
 		reg[26].setName("k0");
-		reg[27].setName("gp");
-		reg[28].setName("sp");
-		reg[29].setName("fp");
-		reg[30].setName("ra");
+		reg[27].setName("k1");
+		reg[28].setName("gp");
+		reg[29].setName("sp");
+		reg[30].setName("fp");
+		reg[31].setName("ra");
 		for (int i = 0; i < reg.length; i++) {
 			reg[i].setContent("00000000000000000000000000000000");
 		}
@@ -108,6 +109,9 @@ public class Registers {
 			System.out.print(reg[i].getName() + " : " + reg[i].getContent()
 					+ "\t");
 			if (i % 3 == 0) {
+				System.out.println();
+			}
+			if(i == 31){
 				System.out.println();
 			}
 		}

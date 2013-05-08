@@ -5,7 +5,7 @@ public class Control {
 	public Control() {
 		String opcode = MIPSWires.control;
 		// R-type instructions
-		if (opcode.equals("000000")// add, or, sll, slt, srl, sub, and opcode
+		if ((opcode.equals("000000") && !MIPSWires.toSignExtend.equals("0000000000001000"))// add, or, sll, slt, srl, sub, and opcode
 				|| opcode.equals("100111")) // nor opcode
 		{
 			MIPSWires.RegDst = "1";

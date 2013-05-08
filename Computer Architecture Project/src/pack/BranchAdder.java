@@ -13,28 +13,28 @@ public class BranchAdder {
 		printMIPSWires();
 	}
 
-	public void branch(){
-		if(MIPSWires.Branch.equals("1")){
+	public void branch() {
+		if (MIPSWires.Branch.equals("1")) {
 			String temp = MIPSWires.toSignExtend;
-			temp = temp.substring(2)+"00";
+			temp = temp.substring(2) + "00";
 			String result = addBinaryString(incrementedAddress, temp);
-			boolean branchAnd = (MIPSWires.zero == "1" && MIPSWires.Branch == "1")? true : false;
-			MIPSWires.pcIn = branchAnd? result : incrementedAddress ;
+			boolean branchAnd = (MIPSWires.zero == "1" && MIPSWires.Branch == "1") ? true
+					: false;
+			MIPSWires.pcIn = branchAnd ? result : incrementedAddress;
 		}
 		processJump();
 	}
-	
-	public String shiftBranchOffset(String offset){
+
+	public String shiftBranchOffset(String offset) {
 		String result = "";
-		if(offset.charAt(0) == '1'){
-			for(int i=0 ; i < 14;i++){
-				result = "1"+result;
+		if (offset.charAt(0) == '1') {
+			for (int i = 0; i < 14; i++) {
+				result = "1" + result;
 			}
 			result = result + "00";
-		}
-		else{
-			for(int j = 0;j<16;j++){
-				result = "0" +result;
+		} else {
+			for (int j = 0; j < 16; j++) {
+				result = "0" + result;
 			}
 		}
 		return result;
@@ -44,27 +44,38 @@ public class BranchAdder {
 		return ALU.adding(s1, s2);
 	}
 
-
 	public void processJump() {
-		if(MIPSWires.Jump.equals("1")){
-			jumpInput = MIPSWires.pcOut.substring(0, 4) + jumpInput + "00";
-			MIPSWires.pcIn = MIPSWires.Jump == "0" ? MIPSWires.pcIn : jumpInput;
-		}
-		if(MIPSWires.control.equals("000011")){
-			MIPSWires.RegWrite = "1";
-			MIPSWires.RegDst = "1";
-			MIPSWires.wReg = "11110";
-			MIPSWires.aluOut = incrementedAddress;
+		if (MIPSWires.Jump.equals("1")) {
+			if (MIPSWires.control.equals("000000")) {
+				System.out.println("hopppa" + MIPSWires.aluIn1);
+				MIPSWires.pcIn = MIPSWires.aluIn1;
+				return;
+			}
+			if (MIPSWires.control.equals("000010")) {
+				jumpInput = MIPSWires.pcOut.substring(0, 4) + jumpInput + "00";
+				MIPSWires.pcIn = MIPSWires.Jump == "0" ? MIPSWires.pcIn
+						: jumpInput;
+			}
+			if (MIPSWires.control.equals("000011")) {
+				jumpInput = MIPSWires.pcOut.substring(0, 4) + jumpInput + "00";
+				MIPSWires.pcIn = MIPSWires.Jump == "0" ? MIPSWires.pcIn
+						: jumpInput;
+				MIPSWires.RegWrite = "1";
+				MIPSWires.RegDst = "1";
+				MIPSWires.wReg = "11111";
+				MIPSWires.aluOut = incrementedAddress;
+			}
 		}
 	}
 
-	
-	public void printMIPSWires(){
-		System.out.println("===========================BRANCH and JUMP========================");
-		System.out.println("jump Address: "+MIPSWires.jumpAdrs);
-		System.out.println("incremented PC: "+incrementedAddress);
-		System.out.println("PC for the next instruction: "+MIPSWires.pcIn);
-		System.out.println("==================================================================");
+	public void printMIPSWires() {
+		System.out
+				.println("===========================BRANCH and JUMP========================");
+		System.out.println("jump Address: " + MIPSWires.jumpAdrs);
+		System.out.println("incremented PC: " + incrementedAddress);
+		System.out.println("PC for the next instruction: " + MIPSWires.pcIn);
+		System.out
+				.println("==================================================================");
 	}
-	
+
 }
