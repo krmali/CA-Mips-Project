@@ -23,9 +23,10 @@ public class InstructionMemory {
 		MIPSWires.wReg = instruction.substring(16, 21);
 		MIPSWires.toSignExtend = instruction.substring(16, 32);
 		MIPSWires.jumpAdrs = instruction.substring(6, 32);
-		incPC();
 		MIPSWires.pcOut = ALU.adding(MIPSWires.pcIn, "0100");
+		MIPSWires.pcIn = ALU.adding(MIPSWires.pcIn, "0100");
 		printMIPSWires();
+		incPC();
 	}
 	
 	private String add(String input1, String input2) {
@@ -75,6 +76,7 @@ public class InstructionMemory {
 	
 	public void printMIPSWires(){
 		System.out.println("\n=======================Instruction memory=====================");
+		System.out.println("Instruction: " + read_current_instruction());
 		System.out.println("Control part:" + MIPSWires.control);
 		System.out.println("Register no1: " + MIPSWires.rReg1);
 		System.out.println("Resgiter no2: "+MIPSWires.rReg2);

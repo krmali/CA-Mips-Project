@@ -59,7 +59,7 @@ public class MIPS {
 		instMemory.write_inst_mem_in_order(instructions);
 		MIPSWires.reset();
 		Memory memory = new Memory(32);
-		intializeMemoryValues(memory);
+//		intializeMemoryValues(memory);
 		Registers regs = new Registers();
 		intializeRegisterValues(regs);
 		BranchAdder branchAdder = new BranchAdder();
@@ -83,10 +83,17 @@ public class MIPS {
 			Exception {
 		System.out
 				.println("*************************************************MIPS SIMULATION*************************************************");
+//		String[] instructions = {
+//				"10000101010010010000000000000100",
+//				"10100001010010010000000000000100",
+//				"00000000100001010100100000100100"};
 		String[] instructions = {
-				"10000101010010010000000000000100",
-				"10100001010010010000000000000100",
-				"00000000100001010100100000100100"};
+
+				"00000001000010000100100000100000",
+
+				"00000001000010000100100000100000",
+
+				"00000001001010000101000000100010"};
 		startBulkSimulation(instructions);
 	}
 
