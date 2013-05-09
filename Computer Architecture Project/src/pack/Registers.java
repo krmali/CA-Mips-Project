@@ -46,7 +46,7 @@ public class Registers {
 	}
 
 	public static int integerValueOf(String binaryString) {
-			return Integer.parseInt(binaryString, 2);
+		return Integer.parseInt(binaryString, 2);
 	}
 
 	public void write() {
@@ -57,8 +57,8 @@ public class Registers {
 			} else {
 				writeRegNum = integerValueOf(MIPSWires.wReg);
 			}
-			if(!reg[writeRegNum].getName().equals("zero")){
-				reg[writeRegNum].setContent(MIPSWires.regWriteData);	
+			if (writeRegNum != 0) {
+				reg[writeRegNum].setContent(MIPSWires.regWriteData);
 			}
 		}
 		printMIPSWires();
@@ -73,8 +73,10 @@ public class Registers {
 			MIPSWires.aluIn1 = reg[integerValueOf(MIPSWires.rReg2)]
 					.getContent();
 		}
-		if (MIPSWires.ALUsrc.equals("0") && !(MIPSWires.toSignExtend.substring(10).equals("000000") || MIPSWires.toSignExtend
-				.substring(10).equals("000010")) || MIPSWires.Branch.equals("1") ) {
+		if (MIPSWires.ALUsrc.equals("0")
+				&& !(MIPSWires.toSignExtend.substring(10).equals("000000") || MIPSWires.toSignExtend
+						.substring(10).equals("000010"))
+				|| MIPSWires.Branch.equals("1")) {
 			MIPSWires.aluIn2 = reg[integerValueOf(MIPSWires.rReg2)]
 					.getContent();
 		} else if ((MIPSWires.toSignExtend.substring(10).equals("000000") || MIPSWires.toSignExtend
@@ -114,7 +116,7 @@ public class Registers {
 			if (i % 3 == 0) {
 				System.out.println();
 			}
-			if(i == 31){
+			if (i == 31) {
 				System.out.println();
 			}
 		}
