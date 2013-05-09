@@ -42,6 +42,7 @@ public class Registers {
 		for (int i = 0; i < reg.length; i++) {
 			reg[i].setContent("00000000000000000000000000000000");
 		}
+		reg[29].setContent("00000000000000000000001111111100");
 	}
 
 	public static int integerValueOf(String binaryString) {
@@ -56,7 +57,9 @@ public class Registers {
 			} else {
 				writeRegNum = integerValueOf(MIPSWires.wReg);
 			}
-			reg[writeRegNum].setContent(MIPSWires.regWriteData);
+			if(!reg[writeRegNum].getName().equals("zero")){
+				reg[writeRegNum].setContent(MIPSWires.regWriteData);	
+			}
 		}
 		printMIPSWires();
 	}

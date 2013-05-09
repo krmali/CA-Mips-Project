@@ -16,7 +16,7 @@ public class Memory {
 	public void processMemory() throws NumberFormatException, Exception {
 		String address = MIPSWires.aluOut;
 		if (MIPSWires.MemWrite.equals("1")) {
-			writeMemory(MIPSWires.rd2, Integer.parseInt(address, 2));
+			writeMemory(MIPSWires.rd2, ALU.integerValueOf(address));
 		}
 		MIPSWires.regWriteData = (MIPSWires.MemtoReg.equals("0")) ? MIPSWires.aluOut
 				: readMemory(Integer.parseInt(address, 2));

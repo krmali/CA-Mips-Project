@@ -39,13 +39,13 @@ public class MIPS {
 
 	public static void startSimulation() throws NumberFormatException,
 			Exception {
-		InstructionMemory im = new InstructionMemory(32);
+		InstructionMemory im = new InstructionMemory(512);
 		MIPSWires.pcIn = "00000000000000000000";
-		im.write_inst_mem("00100001110011010000000000000011", 0);
+		im.write_inst_mem("00000011111000000000000000001000", 0);
 		im.processInstructionMemory();
 		Control c = new Control();
 		Registers rg = new Registers();
-		intializeRegisterValues(rg);
+		//intializeRegisterValues(rg);
 		rg.read();
 		ALUControl aluc = new ALUControl();
 		ALU alu = new ALU();
@@ -58,14 +58,11 @@ public class MIPS {
 
 	public static void startBulkSimulation(String[] instructions)
 			throws NumberFormatException, Exception {
-		InstructionMemory instMemory = new InstructionMemory(128);
+		InstructionMemory instMemory = new InstructionMemory(512);
 		instMemory.write_inst_mem_in_order(instructions);
-		//instMemory.printInstructionMemoryContents();
 		MIPSWires.reset();
 		Memory memory = new Memory(32);
-//		intializeMemoryValues(memory);
 		Registers regs = new Registers();
-		intializeRegisterValues(regs);
 		int clk = 1;
 		while (!instMemory.isEnd()) {
 			System.out.println("\n########################### " + "clock cycle: "
@@ -86,10 +83,7 @@ public class MIPS {
 			Exception {
 		System.out
 				.println("*************************************************MIPS SIMULATION*************************************************");
-//		String[] instructions = {
-//				"10000101010010010000000000000100",
-//				"10100001010010010000000000000100",
-//				"00000000100001010100100000100100"};
+
 		String[] instructions = {
 				"00110001101011100000000011111111",
 				"00110101111110000000000011111111",
@@ -97,11 +91,12 @@ public class MIPS {
 				"00000001000010000100100000100000",
 				"00000001000010010100100000100000",
 				"00000001000010010101000000100010"
-				//"00010101011011001111111111111001"
 				};
 		
 		Assembler assemb = new Assembler();
 		String[] assemblerInstructions = assemb.assemble(new File("src/pack/input_program.txt"));
+		
+		assemb.printAssembledInstruction(assemblerInstructions);
 		
 		
 		startBulkSimulation(assemblerInstructions);
