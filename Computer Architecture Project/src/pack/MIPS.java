@@ -38,7 +38,7 @@ public class MIPS {
 			Exception {
 		InstructionMemory im = new InstructionMemory(32);
 		MIPSWires.pcIn = "00000000000000000000";
-		im.write_inst_mem("00010101011011000000000000001010", 0);
+		im.write_inst_mem("00100001110011010000000000000011", 0);
 		im.processInstructionMemory();
 		Control c = new Control();
 		Registers rg = new Registers();
@@ -88,12 +88,13 @@ public class MIPS {
 //				"10100001010010010000000000000100",
 //				"00000000100001010100100000100100"};
 		String[] instructions = {
-				"00100000000010000000000000010000",
+				"00100001110011010000000000000011",
+				"00000001000010000100100000100000",
 				"00000001000010010100100000100000",
 				"00000001001010000101000000100010"};
 		startBulkSimulation(instructions);
 		
-		//startSimulation();
+		startSimulation();
 	}
 
 }
