@@ -38,7 +38,7 @@ public class MIPS {
 			Exception {
 		InstructionMemory im = new InstructionMemory(32);
 		MIPSWires.pcIn = "00000000000000000000";
-		im.write_inst_mem("00001100000000000000000000001010", 0);
+		im.write_inst_mem("00010101011011000000000000001010", 0);
 		im.processInstructionMemory();
 		Control c = new Control();
 		Registers rg = new Registers();
@@ -57,14 +57,16 @@ public class MIPS {
 			throws NumberFormatException, Exception {
 		InstructionMemory instMemory = new InstructionMemory(32);
 		instMemory.write_inst_mem_in_order(instructions);
+		//instMemory.printInstructionMemoryContents();
 		MIPSWires.reset();
 		Memory memory = new Memory(32);
 		intializeMemoryValues(memory);
 		Registers regs = new Registers();
 		intializeRegisterValues(regs);
-		BranchAdder branchAdder = new BranchAdder();
 		int clk = 0;
+		int x = 0;
 		while (!instMemory.isEnd()) {
+			x++;
 			System.out.println("########################### " + "clock cycle: "
 					+ clk + " ###########################");
 			instMemory.processInstructionMemory();
@@ -74,8 +76,9 @@ public class MIPS {
 			ALU alu = new ALU();
 			memory.processMemory();
 			regs.write();
-			branchAdder.branch();
+			BranchAdder branchAdder = new BranchAdder();
 			clk++;
+			//if(x>4)break;
 		}
 	}
 
@@ -84,10 +87,12 @@ public class MIPS {
 		System.out
 				.println("*************************************************MIPS SIMULATION*************************************************");
 		String[] instructions = {
-				"10000101010010010000000000000100",
-				"10100001010010010000000000000100",
-				"00000000100001010100100000100100"};
+				"00100000000010000000000000010000",
+				"00000001000010010100100000100000",
+				"00000001001010000101000000100010"};
 		startBulkSimulation(instructions);
+		
+		//startSimulation();
 	}
 
 }

@@ -14,14 +14,17 @@ public class BranchAdder {
 	}
 
 	public void branch() {
+		boolean branchAnd = false;
+		String result = ""; 
 		if (MIPSWires.Branch.equals("1")) {
 			String temp = MIPSWires.toSignExtend;
 			temp = temp.substring(2) + "00";
-			String result = addBinaryString(incrementedAddress, temp);
-			boolean branchAnd = (MIPSWires.zero == "1" && MIPSWires.Branch == "1") ? true
+			result = addBinaryString(incrementedAddress, temp);
+			branchAnd = (MIPSWires.zero == "1" && MIPSWires.Branch == "1") ? true
 					: false;
 			MIPSWires.pcIn = branchAnd ? result : incrementedAddress;
 		}
+		MIPSWires.pcIn = branchAnd ? result : incrementedAddress;
 		processJump();
 	}
 
@@ -47,7 +50,6 @@ public class BranchAdder {
 	public void processJump() {
 		if (MIPSWires.Jump.equals("1")) {
 			if (MIPSWires.control.equals("000000")) {
-				System.out.println("hopppa" + MIPSWires.aluIn1);
 				MIPSWires.pcIn = MIPSWires.aluIn1;
 				return;
 			}
