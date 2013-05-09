@@ -4,6 +4,16 @@ public class Control {
 
 	public Control() {
 		String opcode = MIPSWires.control;
+		MIPSWires.RegDst = "0";
+		MIPSWires.Branch = "0";
+		MIPSWires.MemRead = "0";
+		MIPSWires.MemtoReg = "0";
+		MIPSWires.MemWrite = "0";
+		MIPSWires.ALUsrc = "0";
+		MIPSWires.RegWrite = "0";
+		MIPSWires.Jump = "0";
+		MIPSWires.ALUOp = "00";
+		
 		// R-type instructions
 		if (opcode.equals("000000")// add, or, sll, slt, srl, sub, and opcode
 				|| opcode.equals("100111")) // nor opcode

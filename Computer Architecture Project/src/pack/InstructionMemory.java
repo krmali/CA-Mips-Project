@@ -57,6 +57,22 @@ public class InstructionMemory {
 		}
 	}
 	
+	public void write_inst_mem_in_order(String[] data) {
+		int i = 0, j = 0;
+		for (; i < data.length; i++) {
+			write_inst_mem(data[i], j);
+			j += 4;
+		}
+		instruction_mem[j] = "end";
+		instruction_mem[j + 1] = "";
+		instruction_mem[j + 2] = "";
+		instruction_mem[j + 3] = "";
+	}
+	
+	public boolean isEnd() {
+		return read_current_instruction().equals("end");
+	}
+	
 	public void printMIPSWires(){
 		System.out.println("\n=======================Instruction memory=====================");
 		System.out.println("Control part:" + MIPSWires.control);

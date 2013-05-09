@@ -27,4 +27,33 @@ public class MIPSWires {
 	public static String ALUOp = "00";
 	public static String rd2 = "00000000000000000000000000000000";
 	public static String AluControlOutput = "0000";
+	
+	public static void reset() {
+		control = "000000";
+		rReg1 = "00000";
+		rReg2 = "00000" ;
+		wReg = "00000";
+		toSignExtend = "0000000000000000";
+		toShift2 = "00000000000000000000000000000000";
+		jumpAdrs = "00000000000000000000000000";
+		pcOut = "00000000000000000000000000000000";
+		pcIn = "00000000000000000000000000000000";
+		aluIn1 = "00000000000000000000000000000000";
+		aluIn2 = "00000000000000000000000000000000";
+		zero = "0";
+		aluOut = "00000000000000000000000000000000";
+		regWriteData = "00000000000000000000000000000000";
+		//Control signals here
+		RegDst = "0";
+		Branch = "0";
+		MemRead = "0";
+		MemtoReg = "0";
+		MemWrite = "0";
+		ALUsrc = "0";
+		RegWrite = "0";
+		Jump = "0";
+		ALUOp = "00";
+		rd2 = "00000000000000000000000000000000";
+		AluControlOutput = "0000";
+	}
 }
