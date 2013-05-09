@@ -22,7 +22,6 @@ public class BranchAdder {
 			result = addBinaryString(incrementedAddress, temp);
 			branchAnd = (MIPSWires.zero == "1" && MIPSWires.Branch == "1") ? true
 					: false;
-			MIPSWires.pcIn = branchAnd ? result : incrementedAddress;
 		}
 		MIPSWires.pcIn = branchAnd ? result : incrementedAddress;
 		processJump();
@@ -72,7 +71,7 @@ public class BranchAdder {
 
 	public void printMIPSWires() {
 		System.out
-				.println("===========================BRANCH and JUMP========================");
+				.println("\n===========================BRANCH and JUMP========================");
 		System.out.println("jump Address: " + MIPSWires.jumpAdrs);
 		System.out.println("incremented PC: " + incrementedAddress);
 		System.out.println("PC for the next instruction: " + MIPSWires.pcIn);

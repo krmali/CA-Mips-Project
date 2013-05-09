@@ -8,7 +8,7 @@ public class InstructionMemory {
 	int program_counter;
 	int size;
 	String instructionRead;
-	
+
 	InstructionMemory(int size) {
 		this.size = size;
 		instruction_mem = new String[size];
@@ -19,9 +19,10 @@ public class InstructionMemory {
 
 	public void processInstructionMemory() {
 		program_counter = ALU.integerValueOf(MIPSWires.pcIn);
+		System.out.println(program_counter + " yay");
 		String instruction = read_current_instruction();
 		instructionRead = instruction;
-		if(instruction.equals("end")){
+		if (instruction.equals("end")) {
 			MIPSWires.pcOut = ALU.adding(MIPSWires.pcOut, "0100");
 		}
 		MIPSWires.control = instruction.substring(0, 6);
@@ -34,13 +35,13 @@ public class InstructionMemory {
 		printMIPSWires();
 		incPC();
 	}
-	
-	public void intializeInsMem(){
-		for(int i = 0; i<instruction_mem.length;i++){
+
+	public void intializeInsMem() {
+		for (int i = 0; i < instruction_mem.length; i++) {
 			instruction_mem[i] = "00000000";
 		}
 	}
-	
+
 	private String add(String input1, String input2) {
 		int num1 = ALU.integerValueOf(input1);
 		int num2 = ALU.integerValueOf(input2);
@@ -81,32 +82,35 @@ public class InstructionMemory {
 		instruction_mem[j + 2] = "";
 		instruction_mem[j + 3] = "";
 	}
-	
+
 	public boolean isEnd() {
-		return read_current_instruction().equals("end");
+		return read_current_instruction().equals("end")
+				&& instruction_mem[ALU.integerValueOf(MIPSWires.pcIn)].equals("end");
 	}
-	
-	public void printMIPSWires(){
-		System.out.println("\n=======================Instruction memory=====================");
-		System.out.println("read instruction: "+instructionRead);
+
+	public void printMIPSWires() {
+		System.out
+				.println("\n=======================Instruction memory=====================");
+		System.out.println("read instruction: " + instructionRead);
 		System.out.println("Control part:" + MIPSWires.control);
 		System.out.println("Register no1: " + MIPSWires.rReg1);
-		System.out.println("Resgiter no2: "+MIPSWires.rReg2);
-		System.out.println("Write Register: "+MIPSWires.wReg);
-		System.out.println("Sign Extend: "+MIPSWires.toSignExtend);
+		System.out.println("Resgiter no2: " + MIPSWires.rReg2);
+		System.out.println("Write Register: " + MIPSWires.wReg);
+		System.out.println("Sign Extend: " + MIPSWires.toSignExtend);
 		System.out.println("Address to jump to " + MIPSWires.jumpAdrs);
-		System.out.println("PC in: "+MIPSWires.pcIn);
-		System.out.println("PC out: "+MIPSWires.pcOut);
-		System.out.println("===============================================================");
+		System.out.println("PC in: " + MIPSWires.pcIn);
+		System.out.println("PC out: " + MIPSWires.pcOut);
+		System.out
+				.println("===============================================================");
 	}
 
 	public String read_current_instruction() {
 		return read_inst_mem(program_counter);
 	}
-	
-	public void printInstructionMemoryContents(){
-		for(int i=0; i<instruction_mem.length;i++){
-			System.out.println(instruction_mem[i] +" "+ i);
+
+	public void printInstructionMemoryContents() {
+		for (int i = 0; i < instruction_mem.length; i++) {
+			System.out.println(instruction_mem[i] + " " + i);
 		}
 	}
 

@@ -99,7 +99,7 @@ public class Registers {
 
 	public void printMIPSWires() {
 		System.out
-				.println("============================RegisterFile=====================");
+				.println("\n============================RegisterFile=====================");
 		System.out.println("alu input 1: " + MIPSWires.aluIn1);
 		System.out.println("alu input 2: " + MIPSWires.aluIn2);
 		System.out.println("memory write data: " + MIPSWires.rd2);
