@@ -42,7 +42,7 @@ public class Registers {
 		for (int i = 0; i < reg.length; i++) {
 			reg[i].setContent("00000000000000000000000000000000");
 		}
-		reg[29].setContent("00000000000000000000001111111100");
+		reg[29].setContent("00000000000000000000000111111100");
 	}
 
 	public static int integerValueOf(String binaryString) {

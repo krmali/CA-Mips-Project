@@ -61,7 +61,7 @@ public class MIPS {
 		InstructionMemory instMemory = new InstructionMemory(512);
 		instMemory.write_inst_mem_in_order(instructions);
 		MIPSWires.reset();
-		Memory memory = new Memory(32);
+		Memory memory = new Memory(512);
 		Registers regs = new Registers();
 		int clk = 1;
 		while (!instMemory.isEnd()) {
