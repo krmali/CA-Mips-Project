@@ -64,9 +64,7 @@ public class MIPS {
 		Registers regs = new Registers();
 		intializeRegisterValues(regs);
 		int clk = 0;
-		int x = 0;
 		while (!instMemory.isEnd()) {
-			x++;
 			System.out.println("########################### " + "clock cycle: "
 					+ clk + " ###########################");
 			instMemory.processInstructionMemory();
@@ -78,7 +76,6 @@ public class MIPS {
 			regs.write();
 			BranchAdder branchAdder = new BranchAdder();
 			clk++;
-			//if(x>4)break;
 		}
 	}
 
