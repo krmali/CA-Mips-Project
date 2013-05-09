@@ -19,35 +19,35 @@ public class Assembler {
 
 	public Assembler() {
 
-		input_file = new File("/Users/kareemali/Desktop/input.txt");
-		try {
-			fis = new FileInputStream(input_file);
-		} catch (FileNotFoundException e) {
-			// e.printStackTrace();
-			System.out.println("error in finding file");
-
-		}
-
-		first_pass_file = new File(
-				"/Users/kareemali/Desktop/first_pass_file.txt");
-		try {
-			if (first_pass_file.createNewFile()) {
-				System.out.println("File is created!");
-			} else {
-				System.out.println("File already exists.");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			fw = new FileWriter(first_pass_file.getAbsoluteFile());
-			bw = new BufferedWriter(fw);
-			bw.write("hoppa");
-			bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		input_file = new File("/Users/kareemali/Desktop/input.txt");
+//		try {
+//			fis = new FileInputStream(input_file);
+//		} catch (FileNotFoundException e) {
+//			// e.printStackTrace();
+//			System.out.println("error in finding file");
+//
+//		}
+//
+//		first_pass_file = new File(
+//				"/Users/kareemali/Desktop/first_pass_file.txt");
+//		try {
+//			if (first_pass_file.createNewFile()) {
+//				System.out.println("File is created!");
+//			} else {
+//				System.out.println("File already exists.");
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		try {
+//			fw = new FileWriter(first_pass_file.getAbsoluteFile());
+//			bw = new BufferedWriter(fw);
+//			bw.write("hoppa");
+//			bw.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 

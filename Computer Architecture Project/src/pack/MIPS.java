@@ -1,5 +1,8 @@
 package pack;
 
+import java.io.File;
+import java.net.URL;
+
 public class MIPS {
 
 	public String mux(String in1, String in2, String selector) {
@@ -55,7 +58,7 @@ public class MIPS {
 
 	public static void startBulkSimulation(String[] instructions)
 			throws NumberFormatException, Exception {
-		InstructionMemory instMemory = new InstructionMemory(32);
+		InstructionMemory instMemory = new InstructionMemory(128);
 		instMemory.write_inst_mem_in_order(instructions);
 		//instMemory.printInstructionMemoryContents();
 		MIPSWires.reset();
@@ -63,9 +66,9 @@ public class MIPS {
 //		intializeMemoryValues(memory);
 		Registers regs = new Registers();
 		intializeRegisterValues(regs);
-		int clk = 0;
+		int clk = 1;
 		while (!instMemory.isEnd()) {
-			System.out.println("########################### " + "clock cycle: "
+			System.out.println("\n########################### " + "clock cycle: "
 					+ clk + " ###########################");
 			instMemory.processInstructionMemory();
 			Control control = new Control();
@@ -93,9 +96,15 @@ public class MIPS {
 				"00100001110011010000000000000011",
 				"00000001000010000100100000100000",
 				"00000001000010010100100000100000",
-				"00000001000010010101000000100010",
-				"00010101011011001111111111111001"};
-		startBulkSimulation(instructions);
+				"00000001000010010101000000100010"
+				//"00010101011011001111111111111001"
+				};
+		
+		Assembler assemb = new Assembler();
+		String[] assemblerInstructions = assemb.assemble(new File("src/pack/input_program.txt"));
+		
+		
+		startBulkSimulation(assemblerInstructions);
 		
 		//startSimulation();
 	}

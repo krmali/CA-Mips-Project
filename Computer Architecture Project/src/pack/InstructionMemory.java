@@ -19,7 +19,6 @@ public class InstructionMemory {
 
 	public void processInstructionMemory() {
 		program_counter = ALU.integerValueOf(MIPSWires.pcIn);
-		System.out.println(program_counter + " yay");
 		String instruction = read_current_instruction();
 		instructionRead = instruction;
 		if (instruction.equals("end")) {
