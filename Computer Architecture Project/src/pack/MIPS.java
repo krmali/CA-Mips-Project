@@ -2,7 +2,6 @@ package pack;
 
 public class MIPS {
 
-
 	public String mux(String in1, String in2, String selector) {
 		return (selector == "0") ? in1 : in2;
 	}
@@ -15,19 +14,19 @@ public class MIPS {
 		return (bin.charAt(0) == '0') ? "0000000000000000" + bin
 				: "1111111111111111" + bin;
 	}
-	
-	public static void intializeRegisterValues(Registers rg){
+
+	public static void intializeRegisterValues(Registers rg) {
 		String temp = "00000000000000000000000000000000";
-		for(int i=0;i<rg.reg.length;i++){
+		for (int i = 0; i < rg.reg.length; i++) {
 			rg.reg[i].setContent(temp);
 			temp = ALU.adding(temp, "01");
 		}
 		rg.reg[29].setContent("00000000000000000000000000000100");
 	}
-	
-	public static void intializeMemoryValues(Memory memory){
+
+	public static void intializeMemoryValues(Memory memory) {
 		String temp = "00000000";
-		for(int i=0;i<memory.memory.length;i++){
+		for (int i = 0; i < memory.memory.length; i++) {
 			if (temp.length() == 32)
 				temp = temp.substring(24);
 			memory.memory[i] = temp;
@@ -35,7 +34,8 @@ public class MIPS {
 		}
 	}
 
-	public static void startSimulation() throws NumberFormatException, Exception {
+	public static void startSimulation() throws NumberFormatException,
+			Exception {
 		InstructionMemory im = new InstructionMemory(32);
 		MIPSWires.pcIn = "00000000000000000000";
 		im.write_inst_mem("00001100000000000000000000001010", 0);
@@ -52,8 +52,9 @@ public class MIPS {
 		m.processMemory();
 		rg.write();
 	}
-	
-	public static void startBulkSimulation(String[] instructions) throws NumberFormatException, Exception {
+
+	public static void startBulkSimulation(String[] instructions)
+			throws NumberFormatException, Exception {
 		InstructionMemory instMemory = new InstructionMemory(32);
 		instMemory.write_inst_mem_in_order(instructions);
 		MIPSWires.reset();
@@ -64,7 +65,8 @@ public class MIPS {
 		BranchAdder branchAdder = new BranchAdder();
 		int clk = 0;
 		while (!instMemory.isEnd()) {
-			System.out.println("########################### " + "clock cycle: " + clk + " ###########################");
+			System.out.println("########################### " + "clock cycle: "
+					+ clk + " ###########################");
 			instMemory.processInstructionMemory();
 			Control control = new Control();
 			regs.read();
@@ -77,10 +79,14 @@ public class MIPS {
 		}
 	}
 
-	public static void main(String[] args) throws NumberFormatException, Exception {
+	public static void main(String[] args) throws NumberFormatException,
+			Exception {
 		System.out
 				.println("*************************************************MIPS SIMULATION*************************************************");
-		String[] instructions = {"10000101010010010000000000000100", "10100101010010010000000000000100"};
+		String[] instructions = {
+				"10000101010010010000000000000100",
+				"10100001010010010000000000000100",
+				"00000000100001010100100000100100"};
 		startBulkSimulation(instructions);
 	}
 
