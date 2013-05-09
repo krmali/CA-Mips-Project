@@ -60,7 +60,7 @@ public class MIPS {
 		//instMemory.printInstructionMemoryContents();
 		MIPSWires.reset();
 		Memory memory = new Memory(32);
-		intializeMemoryValues(memory);
+//		intializeMemoryValues(memory);
 		Registers regs = new Registers();
 		intializeRegisterValues(regs);
 		int clk = 0;
@@ -86,6 +86,10 @@ public class MIPS {
 			Exception {
 		System.out
 				.println("*************************************************MIPS SIMULATION*************************************************");
+//		String[] instructions = {
+//				"10000101010010010000000000000100",
+//				"10100001010010010000000000000100",
+//				"00000000100001010100100000100100"};
 		String[] instructions = {
 				"00100000000010000000000000010000",
 				"00000001000010010100100000100000",
