@@ -24,7 +24,7 @@ public class InstructionMemory {
 		MIPSWires.toSignExtend = instruction.substring(16, 32);
 		MIPSWires.jumpAdrs = instruction.substring(6, 32);
 		incPC();
-		MIPSWires.pcOut = add(MIPSWires.pcIn, "0100");
+		MIPSWires.pcOut = ALU.adding(MIPSWires.pcIn, "0100");
 		printMIPSWires();
 	}
 	

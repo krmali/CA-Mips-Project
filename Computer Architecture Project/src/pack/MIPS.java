@@ -38,7 +38,7 @@ public class MIPS {
 	public static void startSimulation() throws NumberFormatException, Exception {
 		InstructionMemory im = new InstructionMemory(32);
 		MIPSWires.pcIn = "00000000000000000000";
-		im.write_inst_mem("10100001010010010000000000000100", 0);
+		im.write_inst_mem("00001100000000000000000000001010", 0);
 		im.processInstructionMemory();
 		Control c = new Control();
 		Registers rg = new Registers();
@@ -47,6 +47,7 @@ public class MIPS {
 		ALUControl aluc = new ALUControl();
 		ALU alu = new ALU();
 		Memory m = new Memory(32);
+		BranchAdder branch = new BranchAdder();
 		intializeMemoryValues(m);
 		m.processMemory();
 		rg.write();
